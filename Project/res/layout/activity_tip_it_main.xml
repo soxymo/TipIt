@@ -1,8 +1,67 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.tipit.TipItMainActivity"
-    tools:ignore="MergeRootFrame" />
+    tools:ignore="MergeRootFrame"
+    android:background="@drawable/table_cloth">
+    
+ 
+    <RelativeLayout
+        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom_bar"
+        android:id="@+id/bottomBar">
+
+        <Button
+            android:id="@+id/newButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="New Order"
+            android:background="@color/button"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"/>
+        
+        <Button
+            android:id="@+id/checkButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Checkout"
+            android:background="@color/button"
+            android:padding="5dp"/>
+        
+        <TextView 
+            android:id="@+id/totalView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="24%"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"/>
+        
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_toLeftOf="@id/totalView"
+            android:layout_centerVertical="true"
+            android:text="Total:"
+            android:textSize="28sp"/>
+            
+  
+    </RelativeLayout>
+    
+    <ListView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_above="@id/bottomBar"
+        android:id="@+id/mainList"/>
+    
+</RelativeLayout>
 

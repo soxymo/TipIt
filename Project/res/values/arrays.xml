@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+   <string-array name="entry_text">
+       <item>Told a funny joke</item>
+       <item>Brought a mint</item>
+   </string-array>
+   
+   <integer-array name="entry_weight" >
+       <item>1</item>
+       <item>2</item>
+   </integer-array>
+</resources>

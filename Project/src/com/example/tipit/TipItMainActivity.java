@@ -1,27 +1,33 @@
 package com.example.tipit;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+
+import java.util.ArrayList;
+
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.ListView;
 
 public class TipItMainActivity extends ActionBarActivity {
-
+	private ArrayList<Entry> entries;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tip_it_main);
-
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+		String[] entryText=getResources().getStringArray(R.array.entry_text);
+		int[] entryWeight=getResources().getIntArray(R.array.entry_weight);
+		
+		entries=new ArrayList<Entry>();
+		for(int i=0; i<entryText.length; i++){
+			Entry temp= new Entry(entryText[i], entryWeight[i]);
+			entries.add(temp);
 		}
+		
+		EntryListAdapter adapt = new EntryListAdapter(this, entries);
+		ListView mainList= (ListView) findViewById(R.id.mainList);
+		mainList.setAdapter(adapt);
+
 	}
 
 	@Override
@@ -42,23 +48,6 @@ public class TipItMainActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_tip_it_main,
-					container, false);
-			return rootView;
-		}
 	}
 
 }
