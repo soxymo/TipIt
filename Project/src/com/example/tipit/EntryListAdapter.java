@@ -31,13 +31,26 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 			LayoutInflater inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			rowView=inflater.inflate(R.layout.entry_layout, parent, false);
 			hold.textSlot=(TextView) rowView.findViewById(R.id.content);
+			hold.percentSlot=(TextView) rowView.findViewById(R.id.percent);
 			rowView.setTag(hold);
 		}
 		else{
 			hold=(ViewHolder)rowView.getTag();
 		}
 		
-		hold.textSlot.setText(entryArray.get(position).text);
+		
+			hold.textSlot.setText(entryArray.get(position).text);
+			if(entryArray.get(position).getCurrentValue()==0){
+				//remove thumb drawable
+				hold.percentSlot.setText("0%");
+			}else if(entryArray.get(position).getCurrentValue()==1){
+				hold.percentSlot.setText(String.valueOf(entryArray.get(position).getWeight())+"%");
+				((TextView)hold.percentSlot).setTextColor(0xFF20D43B);
+				
+			}else if(entryArray.get(position).getCurrentValue()==-1){
+				hold.percentSlot.setText("-"+String.valueOf(entryArray.get(position).getWeight())+"%");
+				((TextView)hold.percentSlot).setTextColor(0xFFFF0000);
+			}
 		
 		return rowView;
 	}
@@ -45,6 +58,7 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 	public class ViewHolder
 	{
 	    TextView textSlot;
+	    TextView percentSlot;
 	    
 	    
 	}

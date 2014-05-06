@@ -4,10 +4,14 @@
    <string-array name="entry_text">
        <item>Told a funny joke</item>
        <item>Brought a mint</item>
+       <item>Refilled Water on time</item>
+       <item>Calls you by your Name</item>
    </string-array>
    
    <integer-array name="entry_weight" >
        <item>1</item>
        <item>2</item>
+       <item>3</item>
+       <item>4</item>
    </integer-array>
 </resources>

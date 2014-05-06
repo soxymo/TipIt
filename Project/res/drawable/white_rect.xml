@@ -5,21 +5,13 @@
   
   <!-- Specify a semi-transparent solid green background color -->
   <solid android:color="#FFFFFF" />
-  <corners
-      android:topRightRadius="10dp"
-  	  android:bottomRightRadius="10dp"
-  	  android:bottomLeftRadius="10dp"/>
   
-  <stroke
+  
+  <!--<stroke
       android:width="2dp"
-      android:color="#999999"/>
+      android:color="#999999"/>-->
       
   	
   
   <!-- Specify the margins that all content inside the drawable must adhere to -->
-  <padding
-    android:left="30dp"
-    android:right="30dp"
-    android:top="30dp"
-    android:bottom="30dp" />
 </shape>  

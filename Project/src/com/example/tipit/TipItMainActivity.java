@@ -2,8 +2,11 @@ package com.example.tipit;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,14 +22,20 @@ public class TipItMainActivity extends ActionBarActivity {
 		int[] entryWeight=getResources().getIntArray(R.array.entry_weight);
 		
 		entries=new ArrayList<Entry>();
+		Entry firstOne= new Entry("Base Modifier", 15, "first", 1);
+		entries.add(firstOne);
 		for(int i=0; i<entryText.length; i++){
-			Entry temp= new Entry(entryText[i], entryWeight[i]);
+			Entry temp= new Entry(entryText[i], entryWeight[i], "standard", -1);
 			entries.add(temp);
 		}
+		Entry lastOne = new Entry("Add", 0, "last", 0);
+		entries.add(lastOne);
 		
 		EntryListAdapter adapt = new EntryListAdapter(this, entries);
 		ListView mainList= (ListView) findViewById(R.id.mainList);
 		mainList.setAdapter(adapt);
+		
+		
 
 	}
 
