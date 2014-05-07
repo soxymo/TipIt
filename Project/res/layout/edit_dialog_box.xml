@@ -51,32 +51,34 @@
         android:layout_toRightOf="@id/edit_weight"
         android:layout_alignBottom="@id/edit_weight"/>
     
+     <LinearLayout
+         android:layout_height="50dp"
+         android:layout_width="match_parent"
+         android:layout_alignParentBottom="true"
+         android:orientation="horizontal">
+	     <Button
+	        android:id="@+id/cancel_button"
+	        android:layout_height="50dp"
+	        android:layout_width="wrap_content"
+	        android:text="Cancel"
+	        android:layout_weight="1"/>
+	        
+		<Button
+		    android:id="@+id/delete_button"
+		    android:layout_width="50dp"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="Delete"/>
+	    
+	    <Button
+	        android:id="@+id/save_button"
+	        android:layout_height="50dp"
+	        android:layout_width="wrap_content"
+	        android:text="Save"
+	        android:layout_weight="1"/>
+    </LinearLayout>
     
     
-	<TextView
-	    android:id="@+id/invisible"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:layout_centerHorizontal="true"/>
-    
-    <Button
-        android:id="@+id/save_button"
-        android:layout_height="50dp"
-        android:layout_width="wrap_content"
-        android:text="Save"
-        android:layout_toRightOf="@id/invisible"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"/>
-    
-     <Button
-        android:id="@+id/cancel_button"
-        android:layout_height="50dp"
-        android:layout_width="100dp"
-        android:text="Cancel"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@id/invisible"
-        android:layout_alignParentBottom="true"/>"
     
 </RelativeLayout>
     

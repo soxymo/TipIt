@@ -19,16 +19,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class TipItMainActivity extends ActionBarActivity {
 	private ArrayList<Entry> entries;
 	private Context context;
 	private EntryListAdapter adapt;
+	private TextView totalView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -93,6 +96,7 @@ public class TipItMainActivity extends ActionBarActivity {
 		Log.d("RSS", sb.toString());
 		
 		
+		totalView = (TextView) findViewById(R.id.totalView);
 		
 		Entry firstOne= new Entry("Base Modifier", 15, true, 1);
 		entries.add(firstOne);
@@ -101,7 +105,8 @@ public class TipItMainActivity extends ActionBarActivity {
 			entries.add(temp);
 		}
 		
-		adapt = new EntryListAdapter(this, entries);
+		
+		adapt = new EntryListAdapter(this, entries, totalView);
 		ListView mainList= (ListView) findViewById(R.id.mainList);
 		View footerView = ((LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.add_layout, null, false);
 		mainList.addFooterView(footerView);
@@ -110,6 +115,7 @@ public class TipItMainActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				makeNewDialog();
+				addUpTotal();
 			}
 
 		});
@@ -121,6 +127,7 @@ public class TipItMainActivity extends ActionBarActivity {
 		//adapt.updateList(entries);
 		
 		Button checkButton=(Button)findViewById(R.id.checkButton);
+		addUpTotal();
 		
 	}
 	
@@ -159,6 +166,16 @@ public class TipItMainActivity extends ActionBarActivity {
 		entries.add(newEntry);
 		adapt.notifyDataSetChanged();
 		
+	}
+	
+	public void addUpTotal(){
+		int total=0;
+		for(int i=0; i<entries.size(); i++){
+			total+=entries.get(i).getWeight()*entries.get(i).getCurrentValue();
+		}
+		if(total<0)
+			total=0;
+		totalView.setText(String.valueOf(total)+"%");
 	}
 
 	@Override
