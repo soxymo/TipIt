@@ -52,18 +52,20 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 		else{
 			hold=(ViewHolder)rowView.getTag();
 		}
-		hold.textSlot.setText(entryArray.get(position).text);
 		if(entryArray.get(position).getCurrentValue()==0){		//default value
 			hold.thumbSlot.setImageDrawable(null);
+			hold.textSlot.setText(entryArray.get(position).getText());
 			hold.percentSlot.setText("0%");
 			((TextView)hold.percentSlot).setTextColor(0xFF000000);
 
 		}else if(entryArray.get(position).getCurrentValue()==1){		//positive
+			hold.textSlot.setText(entryArray.get(position).getText());
 			hold.percentSlot.setText("+"+String.valueOf(entryArray.get(position).getWeight())+"%");
 			((TextView)hold.percentSlot).setTextColor(0xFF20D43B);
 			hold.thumbSlot.setImageDrawable(thumbsUp);
 
 		}else if(entryArray.get(position).getCurrentValue()==-1){		//negative
+			hold.textSlot.setText(entryArray.get(position).getNegText());
 			hold.percentSlot.setText("-"+String.valueOf(entryArray.get(position).getWeight())+"%");
 			((TextView)hold.percentSlot).setTextColor(0xFFFF0000);
 			hold.thumbSlot.setImageDrawable(thumbsDown);
@@ -117,6 +119,7 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 	
 		final EditText textField = (EditText) dialog.findViewById(R.id.edit_text);
 		final EditText weightField=(EditText) dialog.findViewById(R.id.edit_weight);
+		final EditText negField=(EditText) dialog.findViewById(R.id.edit_neg);
 		Button saveButton = (Button) dialog.findViewById(R.id.save_button);
 		Button cancelButton = (Button) dialog.findViewById(R.id.cancel_button);
 		Button deleteButton = (Button) dialog.findViewById(R.id.delete_button);
@@ -124,9 +127,12 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 		dialog.setTitle("Edit Entry");
 		textField.setText(editEntry.text);
 		weightField.setText(String.valueOf(editEntry.weight));
+		negField.setText(String.valueOf(editEntry.negText));
 		if(editEntry.isFirst){
 			textField.setTextColor(0xFFFF0000);
-			textField.setText("Cannot change Modifier Name");
+			textField.setText("Cannot change Modifier Text");
+			negField.setTextColor(0xFFFF0000);
+			negField.setText("Can only change Weight");
 			deleteButton.setVisibility(View.GONE);
 			textField.setKeyListener(null);
 		}
@@ -156,18 +162,16 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 		saveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//Entry customEntry=new Entry("Hello?", 3, "af", 0);
-				//Entry customEntry= new Entry(textField.getText().toString(), Integer.parseInt(weightField.getText().toString()),false, 0);
-				//addToList(customEntry);
-				if(!editEntry.isFirst)
+				if(!editEntry.isFirst){
 					editEntry.text=textField.getText().toString();
+					editEntry.negText=negField.getText().toString();
+				}
 				editEntry.weight=Integer.parseInt(weightField.getText().toString());
 				updateTotal();
 				dialog.dismiss();
 			}
 		});
 		dialog.show();
-		//return editEntry;
 	}
 	
 	

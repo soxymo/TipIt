@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="200dp"
+    android:layout_height="280dp"
     android:layout_width="match_parent">
     
     
@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:textSize="20sp"
         android:text="@string/text"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"/>
     
     <EditText
         android:layout_below="@id/text_display"
@@ -23,15 +24,41 @@
         android:inputType="text"
         android:maxLength="50"
         android:layout_marginLeft="20dp"/>
-
+    
     <TextView
-        android:id="@+id/weight_display"
+        android:id="@+id/neg_display"
         android:layout_below="@id/edit_text"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:textSize="20sp"
+        android:text="Failure Text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"/>
+    
+    <EditText
+        android:layout_below="@id/neg_display"
+        android:id="@+id/edit_neg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_centerVertical="true"
+        android:inputType="text"
+        android:maxLength="50"
+        android:layout_marginLeft="20dp"
+        />
+    
+  
+
+    <TextView
+        android:id="@+id/weight_display"
+        android:layout_below="@id/edit_neg"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="20sp"
         android:text="@string/weight"
-        android:layout_marginLeft="20dp"/>
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"/>
     
     <EditText
         android:layout_below="@id/weight_display"

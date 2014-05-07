@@ -7,12 +7,14 @@ public class Entry {
 	int weight;
 	boolean isFirst;
 	int currentValue;
+	String negText;
 	
-	public Entry(String text, int weight, boolean isFirst, int currentValue){
+	public Entry(String text, String negText, int weight, boolean isFirst, int currentValue){
 		this.text=text;
 		this.weight=weight;
 		this.isFirst=isFirst;
 		this.currentValue=currentValue;
+		this.negText=negText;
 	}
 	
 	public String getText(){
@@ -20,6 +22,13 @@ public class Entry {
 	}
 	public void setText(String editText){
 		text=editText;
+	}
+	
+	public String getNegText(){
+		return negText;
+	}
+	public void setNegText(String editText){
+		negText=editText;
 	}
 
 	public int getWeight(){
@@ -41,6 +50,10 @@ public class Entry {
 			currentValue=-1;
 		else if(currentValue==-1)
 			currentValue=0;
+	}
+	
+	public void resetCurrentValue(){
+		currentValue=0;
 	}
 	
 	public boolean getIsFirst(){
