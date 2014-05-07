@@ -35,12 +35,12 @@ public class Entry {
 	}
 	
 	public void toggleCurrentValue(){
-		if(weight==0)
-			weight=1;
-		if(weight==1)
-			weight=-1;
-		if(weight==-1)
-			weight=0;
+		if(currentValue==0)
+			currentValue=1;
+		else if(currentValue==1)
+			currentValue=-1;
+		else if(currentValue==-1)
+			currentValue=0;
 	}
 	
 	public String getType(){

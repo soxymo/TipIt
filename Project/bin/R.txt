@@ -232,7 +232,9 @@ int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable bottom_bar 0x7f020057
 int drawable ic_launcher 0x7f020058
 int drawable table_cloth 0x7f020059
-int drawable white_rect 0x7f02005a
+int drawable thumbs_down_icon 0x7f02005a
+int drawable thumbs_up_icon 0x7f02005b
+int drawable white_rect 0x7f02005c
 int id action_bar 0x7f05001c
 int id action_bar_activity_content 0x7f050015
 int id action_bar_container 0x7f05001b
@@ -244,7 +246,7 @@ int id action_context_bar 0x7f05001d
 int id action_menu_divider 0x7f050016
 int id action_menu_presenter 0x7f050017
 int id action_mode_close_button 0x7f050024
-int id action_settings 0x7f050044
+int id action_settings 0x7f050045
 int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
 int id beginning 0x7f050011
@@ -296,6 +298,7 @@ int id showTitle 0x7f050006
 int id split_action_bar 0x7f05001e
 int id submit_area 0x7f050039
 int id tabMode 0x7f050002
+int id thumbPic 0x7f050044
 int id title 0x7f05002b
 int id top_action_bar 0x7f050020
 int id totalView 0x7f050040

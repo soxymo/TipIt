@@ -1,15 +1,23 @@
 package com.example.tipit;
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashSet;
 
-import android.content.SharedPreferences;
+import android.content.Context;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class TipItMainActivity extends ActionBarActivity {
@@ -22,6 +30,62 @@ public class TipItMainActivity extends ActionBarActivity {
 		int[] entryWeight=getResources().getIntArray(R.array.entry_weight);
 		
 		entries=new ArrayList<Entry>();
+		
+		String filePath=String.valueOf(this.getFilesDir())+"/myfile";
+		
+		File file=new File(filePath);
+		
+		if(!file.exists()){
+			Log.d("RSS", "Creating new file now");
+			String filename = "myfile";
+			String string = "Hello world!!!!!!!!!\n";
+			String string2 ="Stick it to the Man!";
+			FileOutputStream outputStream;
+	
+			try {
+			  outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+			  outputStream.write(string.getBytes());
+			  outputStream.write(string2.getBytes());
+			  outputStream.close();
+			} catch (Exception e) {
+			  e.printStackTrace();
+			}
+		}
+		
+		
+		if(file.exists())      
+			Log.d("RSS", "File Found ");
+		else{
+			Log.d("RSS", "File doesn't exist");
+		}
+		
+		//Read from File;
+		InputStream is;
+		StringBuilder sb = new StringBuilder();
+		try {
+			is = new FileInputStream(file);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		    String line = null;
+		    try {
+				while ((line = reader.readLine()) != null) {
+				  sb.append(line).append("\n");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		    try {
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		Log.d("RSS", sb.toString());
+		
+		
+		
 		Entry firstOne= new Entry("Base Modifier", 15, "first", 1);
 		entries.add(firstOne);
 		for(int i=0; i<entryText.length; i++){
@@ -31,12 +95,19 @@ public class TipItMainActivity extends ActionBarActivity {
 		Entry lastOne = new Entry("Add", 0, "last", 0);
 		entries.add(lastOne);
 		
+		
 		EntryListAdapter adapt = new EntryListAdapter(this, entries);
 		ListView mainList= (ListView) findViewById(R.id.mainList);
 		mainList.setAdapter(adapt);
 		
+		//entries.get(1).setText("HELLO!!");
+		//norifyDataSetChange
 		
-
+		//adapt.updateList(entries);
+		
+		Button checkButton=(Button)findViewById(R.id.checkButton);
+		
+		//checkBut
 	}
 
 	@Override
