@@ -5,13 +5,13 @@ import android.util.Log;
 public class Entry {
 	String text;
 	int weight;
-	String type;
+	boolean isFirst;
 	int currentValue;
 	
-	public Entry(String text, int weight, String type, int currentValue){
+	public Entry(String text, int weight, boolean isFirst, int currentValue){
 		this.text=text;
 		this.weight=weight;
-		this.type=type;
+		this.isFirst=isFirst;
 		this.currentValue=currentValue;
 	}
 	
@@ -43,13 +43,13 @@ public class Entry {
 			currentValue=0;
 	}
 	
-	public String getType(){
-		return type;
+	public boolean getIsFirst(){
+		return isFirst;
 	}
 	
 	
 	public String serialize(){
-		String output=text+","+String.valueOf(weight)+","+type+","+String.valueOf(currentValue);
+		String output=text+","+String.valueOf(weight)+","+isFirst+","+String.valueOf(currentValue);
 		Log.d("RSS",output);
 		return output;
 	}

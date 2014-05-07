@@ -11,21 +11,29 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class TipItMainActivity extends ActionBarActivity {
 	private ArrayList<Entry> entries;
+	private Context context;
+	private EntryListAdapter adapt;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tip_it_main);
+		context=this;
 		String[] entryText=getResources().getStringArray(R.array.entry_text);
 		int[] entryWeight=getResources().getIntArray(R.array.entry_weight);
 		
@@ -86,28 +94,71 @@ public class TipItMainActivity extends ActionBarActivity {
 		
 		
 		
-		Entry firstOne= new Entry("Base Modifier", 15, "first", 1);
+		Entry firstOne= new Entry("Base Modifier", 15, true, 1);
 		entries.add(firstOne);
 		for(int i=0; i<entryText.length; i++){
-			Entry temp= new Entry(entryText[i], entryWeight[i], "standard", -1);
+			Entry temp= new Entry(entryText[i], entryWeight[i], false, -1);
 			entries.add(temp);
 		}
-		Entry lastOne = new Entry("Add", 0, "last", 0);
-		entries.add(lastOne);
 		
-		
-		EntryListAdapter adapt = new EntryListAdapter(this, entries);
+		adapt = new EntryListAdapter(this, entries);
 		ListView mainList= (ListView) findViewById(R.id.mainList);
+		View footerView = ((LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.add_layout, null, false);
+		mainList.addFooterView(footerView);
+		footerView.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				makeNewDialog();
+			}
+
+		});
+
 		mainList.setAdapter(adapt);
 		
-		//entries.get(1).setText("HELLO!!");
 		//norifyDataSetChange
 		
 		//adapt.updateList(entries);
 		
 		Button checkButton=(Button)findViewById(R.id.checkButton);
 		
-		//checkBut
+	}
+	
+	public void makeNewDialog(){
+		final Dialog dialog = new Dialog(context);
+		dialog.setContentView(R.layout.dialog_box);
+	
+		final EditText textField = (EditText) dialog.findViewById(R.id.edit_text);
+		final EditText weightField=(EditText) dialog.findViewById(R.id.edit_weight);
+		Button saveButton = (Button) dialog.findViewById(R.id.save_button);
+		Button cancelButton = (Button) dialog.findViewById(R.id.cancel_button);
+		dialog.setTitle("Make Your Own Entry");
+
+		// if button is clicked, close the custom dialog
+		cancelButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+		
+		saveButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//Entry customEntry=new Entry("Hello?", 3, "af", 0);
+				Entry customEntry= new Entry(textField.getText().toString(), Integer.parseInt(weightField.getText().toString()),false, 0);
+				addToList(customEntry);
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
+		//return editEntry;
+	}
+	
+	public void addToList(Entry newEntry){
+		entries.add(newEntry);
+		adapt.notifyDataSetChanged();
+		
 	}
 
 	@Override

@@ -4,13 +4,17 @@ package com.example.tipit;
 
 import java.util.ArrayList;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,53 +49,39 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 		else{
 			hold=(ViewHolder)rowView.getTag();
 		}
-		
-		
-			hold.textSlot.setText(entryArray.get(position).text);
-			if(entryArray.get(position).getCurrentValue()==0){
-				hold.thumbSlot.setImageDrawable(null);
-				hold.percentSlot.setText("0%");
-				((TextView)hold.percentSlot).setTextColor(0xFF000000);
-				
-			}else if(entryArray.get(position).getCurrentValue()==1){
-				hold.percentSlot.setText(String.valueOf(entryArray.get(position).getWeight())+"%");
-				((TextView)hold.percentSlot).setTextColor(0xFF20D43B);
-				hold.thumbSlot.setImageDrawable(thumbsUp);
-				//thumbsUp.setBounds(0, 0, 50, 50);
-				//hold.percentSlot.setCompoundDrawables(thumbsUp, null, null, null); //up right down and left puts image in listview
-				
-				
-			}else if(entryArray.get(position).getCurrentValue()==-1){
-				hold.percentSlot.setText("-"+String.valueOf(entryArray.get(position).getWeight())+"%");
-				((TextView)hold.percentSlot).setTextColor(0xFFFF0000);
-				hold.thumbSlot.setImageDrawable(thumbsDown);
-				//hold.percentSlot.setCompoundDrawablesWithIntrinsicBounds(thumbsDown, null, null, null); //up right down and left puts image in listview
-				//thumbsUp.setBounds(0, 0, 50, 50);
-			}
-			
-			rowView.setOnClickListener(new OnClickListener(){
+		hold.textSlot.setText(entryArray.get(position).text);
+		if(entryArray.get(position).getCurrentValue()==0){		//default value
+			hold.thumbSlot.setImageDrawable(null);
+			hold.percentSlot.setText("0%");
+			((TextView)hold.percentSlot).setTextColor(0xFF000000);
 
-				@Override
-				public void onClick(View v) {
-					if(position!=0 && position!=entryArray.size()-1){
-						entryArray.get(position).toggleCurrentValue();
-						notifyDataSetChanged();
-					}else if(position==entryArray.size()-1){
-						//do add entry listener here
-					}
-					
+		}else if(entryArray.get(position).getCurrentValue()==1){		//positive
+			hold.percentSlot.setText("+"+String.valueOf(entryArray.get(position).getWeight())+"%");
+			((TextView)hold.percentSlot).setTextColor(0xFF20D43B);
+			hold.thumbSlot.setImageDrawable(thumbsUp);
+
+		}else if(entryArray.get(position).getCurrentValue()==-1){		//negative
+			hold.percentSlot.setText("-"+String.valueOf(entryArray.get(position).getWeight())+"%");
+			((TextView)hold.percentSlot).setTextColor(0xFFFF0000);
+			hold.thumbSlot.setImageDrawable(thumbsDown);
+		}
+
+		rowView.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				if(position!=0 ){
+					entryArray.get(position).toggleCurrentValue();
+					notifyDataSetChanged();
 				}
-				
-			});
-		
+			}
+
+		});
+
 		return rowView;
 	}
+
 	
-	public void updateList(ArrayList<Entry> newEntries){
-		entryArray=newEntries;
-		notifyDataSetChanged();
-		
-	}
 	
 	public class ViewHolder
 	{
