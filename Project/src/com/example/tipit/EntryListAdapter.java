@@ -84,7 +84,7 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 
 		});
 		
-		rowView.setOnLongClickListener(new OnLongClickListener() {
+		rowView.setOnLongClickListener(new OnLongClickListener() {	//allow edit text on long click
 
 			@Override
 			public boolean onLongClick(View v) {
@@ -99,7 +99,7 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 		return rowView;
 	}
 	
-	public void updateTotal(){
+	public void updateTotal(){		
 		int total=0;
 		for(int i=0; i<entryArray.size(); i++){
 			total+=entryArray.get(i).getWeight()*entryArray.get(i).getCurrentValue();
@@ -117,18 +117,18 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 		final Dialog dialog = new Dialog(context);
 		dialog.setContentView(R.layout.edit_dialog_box);
 	
-		final EditText textField = (EditText) dialog.findViewById(R.id.edit_text);
+		final EditText textField = (EditText) dialog.findViewById(R.id.edit_text);	//get handles on everything
 		final EditText weightField=(EditText) dialog.findViewById(R.id.edit_weight);
 		final EditText negField=(EditText) dialog.findViewById(R.id.edit_neg);
 		Button saveButton = (Button) dialog.findViewById(R.id.save_button);
 		Button cancelButton = (Button) dialog.findViewById(R.id.cancel_button);
 		Button deleteButton = (Button) dialog.findViewById(R.id.delete_button);
 		
-		dialog.setTitle("Edit Entry");
+		dialog.setTitle("Edit Entry");		//put current values into edit text
 		textField.setText(editEntry.text);
 		weightField.setText(String.valueOf(editEntry.weight));
 		negField.setText(String.valueOf(editEntry.negText));
-		if(editEntry.isFirst){
+		if(editEntry.isFirst){					//cannont edit first view
 			textField.setTextColor(0xFFFF0000);
 			textField.setText("Cannot change Modifier Text");
 			negField.setTextColor(0xFFFF0000);
@@ -138,14 +138,14 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 		}
 
 		// if button is clicked, close the custom dialog
-		cancelButton.setOnClickListener(new OnClickListener() {
+		cancelButton.setOnClickListener(new OnClickListener() {			//cancel button click listener
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
 			}
 		});
 		
-		deleteButton.setOnClickListener(new OnClickListener(){
+		deleteButton.setOnClickListener(new OnClickListener(){			//delete button click listener
 
 			@Override
 			public void onClick(View v) {
@@ -159,7 +159,7 @@ public class EntryListAdapter extends ArrayAdapter<Entry> {
 			
 		});
 		
-		saveButton.setOnClickListener(new OnClickListener() {
+		saveButton.setOnClickListener(new OnClickListener() {			//Save button click listener
 			@Override
 			public void onClick(View v) {
 				if(!editEntry.isFirst){

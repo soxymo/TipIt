@@ -1,3 +1,8 @@
+/*
+ * 
+ * By Ryan Sligh
+ */
+
 package com.example.tipit;
 
 
@@ -18,9 +23,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,15 +46,15 @@ public class TipItMainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tip_it_main);
 		context=this;
-		String[] entryText=getResources().getStringArray(R.array.entry_text);
+		String[] entryText=getResources().getStringArray(R.array.entry_text);	//open arrays
 		String[] negText=getResources().getStringArray(R.array.neg_text);
 		int[] entryWeight=getResources().getIntArray(R.array.entry_weight);
 		
 		entries=new ArrayList<Entry>();
 		
 		
-		
-		String filePath=String.valueOf(this.getFilesDir())+"/myfile";	//beginning of file stuff
+		//I will proably implement this in the future
+		/*String filePath=String.valueOf(this.getFilesDir())+"/myfile";	//beginning of file stuff
 		
 		File file=new File(filePath);
 		
@@ -100,25 +105,25 @@ public class TipItMainActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 		
-		Log.d("RSS", sb.toString());		//end of file stuff
+		Log.d("RSS", sb.toString());*/		//end of file stuff
 		
 		
 		
 		
 		totalView = (TextView) findViewById(R.id.totalView);
 		
-		Entry firstOne= new Entry("Standard Tip", "", 15, true, 1);
+		Entry firstOne= new Entry("Standard Tip", "", 15, true, 1);	//load inital data into entrys
 		entries.add(firstOne);
 		for(int i=0; i<entryText.length; i++){
 			Entry temp= new Entry(entryText[i], negText[i], entryWeight[i], false, 0);
 			entries.add(temp);
 		}
 		
-		final RelativeLayout mainLayout=(RelativeLayout) findViewById(R.id.container);
+		final RelativeLayout mainLayout=(RelativeLayout) findViewById(R.id.container);	
 		final RelativeLayout checkoutLayout=(RelativeLayout) findViewById(R.id.checkout_container);
 		checkoutLayout.setVisibility(View.GONE);
 
-		adapt = new EntryListAdapter(this, entries, totalView);
+		adapt = new EntryListAdapter(this, entries, totalView);		//listview and adapter stuff;
 		ListView mainList= (ListView) findViewById(R.id.mainList);
 		View footerView = ((LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.add_layout, null, false);
 		mainList.addFooterView(footerView);
@@ -255,16 +260,18 @@ public class TipItMainActivity extends ActionBarActivity {
 		totalView.setText(String.valueOf(total)+"%");
 		totalTip=total;
 	}
+	
 
-	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-
+		Log.d("RSS", "it is actually getting here");
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.tip_it_main, menu);
+		//MenuInflater inflater = getMenuInflater();
+	    //inflater.inflate(R.menu.mymenu, menu);
+		getMenuInflater().inflate(R.menu.mymenu, menu);
 		return true;
 	}
 
-	@Override
+	/*@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -274,6 +281,6 @@ public class TipItMainActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	}*/
 
 }

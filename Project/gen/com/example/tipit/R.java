@@ -1044,6 +1044,7 @@ containing a value of this type.
         public static final int list_item=0x7f050029;
         public static final int mainList=0x7f050041;
         public static final int middle=0x7f050012;
+        public static final int name_menu=0x7f050057;
         public static final int neg_display=0x7f05004b;
         public static final int never=0x7f050009;
         public static final int newButton=0x7f05003e;
@@ -1141,7 +1142,8 @@ containing a value of this type.
         public static final int support_simple_spinner_dropdown_item=0x7f03001d;
     }
     public static final class menu {
-        public static final int tip_it_main=0x7f0d0000;
+        public static final int mymenu=0x7f0d0000;
+        public static final int tip_it_main=0x7f0d0001;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1188,6 +1190,7 @@ containing a value of this type.
         public static final int add=0x7f0a0010;
         public static final int app_name=0x7f0a000d;
         public static final int hello_world=0x7f0a000e;
+        public static final int ryan_sligh=0x7f0a0013;
         public static final int text=0x7f0a0011;
         public static final int weight=0x7f0a0012;
     }

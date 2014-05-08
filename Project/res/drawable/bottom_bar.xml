@@ -10,7 +10,7 @@
   
   <!-- Specify a semi-transparent solid green background color -->
       
-  <solid android:color="#FFFFFF" />
+  <solid android:color="#CCFFFFFF" />
   <!--  <corners
       android:topLeftRadius="10dp"
       android:topRightRadius="10dp"/>-->
